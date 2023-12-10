@@ -1,11 +1,14 @@
 const express = require('express');
+const server = express();
 const { default: mongoose } = require('mongoose');
-const { createProduct } = require('./controller/Product');
+const cors = require('cors')
 const productsRouters = require('./routes/Products')
 const categoriesRouter = require('./routes/Categories')
 const brandsRouter = require('./routes/Brands')
-const server = express();
-const cors = require('cors')
+const usersRouter = require('./routes/Users')
+const authRouter = require('./routes/Auth')
+const cartRouter = require('./routes/Cart')
+
 //middelewares
 server.use(cors({
     exposedHeaders:['X-Total-Count']
@@ -14,6 +17,9 @@ server.use(express.json()); // to parse req.body
 server.use('/products', productsRouters.router)
 server.use('/categories', categoriesRouter.router)
 server.use('/brands', brandsRouter.router)
+server.use('/users', usersRouter.router)
+server.use('/auth', authRouter.router)
+server.use('/cart', cartRouter.router)
 
 main().then(console.log("DB Connected")).catch(err=>console.log(err))
 async function main(){
