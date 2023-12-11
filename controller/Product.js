@@ -19,9 +19,9 @@ exports.fetchAllProducts = async (req,res)=>{
     // TODO : We have to try with multiple categories and brands after change in front-end
 
 
-    let query = Product.find()
+    let query = Product.find({deleted:{$ne:true}})
 
-    let totalProductsQuery = Product.find()
+    let totalProductsQuery = Product.find({deleted:{$ne:true}})
     if(req.query.category){
         query = query.find({category:req.query.category})
         totalProductsQuery = totalProductsQuery.find({category:req.query.category})
