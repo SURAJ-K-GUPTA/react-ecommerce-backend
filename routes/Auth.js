@@ -1,5 +1,5 @@
 const express = require("express");
-const { createUser, loginUser, checkUser } = require("../controller/Auth");
+const { createUser, loginUser, checkAuth } = require("../controller/Auth");
 const passport = require("passport");
 const { isAuth } = require("../services/common");
 
@@ -9,6 +9,6 @@ const router = express.Router();
 router
   .post("/signup", createUser)
   .post("/login", passport.authenticate('local'), loginUser)
-  .get('/check',isAuth(),checkUser)
+  .get('/check',isAuth(),checkAuth)
 
 exports.router = router;
